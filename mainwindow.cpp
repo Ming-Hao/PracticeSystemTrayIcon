@@ -14,7 +14,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     connect(ui->btnLoad, &QAbstractButton::clicked, this, &MainWindow::refreshWindowList);
+
     connect(trayIcon, &CustomTrayIcon::reload, this, &MainWindow::refreshWindowList);
+    setWindowIcon(trayIcon->icon());
     trayIcon->show();
 }
 
