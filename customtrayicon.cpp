@@ -5,7 +5,7 @@
 
 CustomTrayIcon::CustomTrayIcon(QWidget* window, QObject *parent)
     : QSystemTrayIcon(parent)
-    , m_window(window)
+    , window(window)
     , trayIconMenu(new QMenu())
     , reloadAction(new QAction())
     , minimizeAction(new QAction())
@@ -17,7 +17,7 @@ CustomTrayIcon::CustomTrayIcon(QWidget* window, QObject *parent)
     setContextMenu(trayIconMenu);
 
     setIcon(qApp->style()->standardIcon(QStyle::SP_DesktopIcon));
-    setToolTip(m_window->windowTitle());
+    setToolTip(window->windowTitle());
 
     setTrayIconConnections();
 }
@@ -28,10 +28,10 @@ void CustomTrayIcon::createActions()
     connect(reloadAction, &QAction::triggered, this, &CustomTrayIcon::reload);
 
     minimizeAction->setText(tr("Mi&nimize"));
-    connect(minimizeAction, &QAction::triggered, m_window, &QWidget::hide);
+    connect(minimizeAction, &QAction::triggered, window, &QWidget::hide);
 
     restoreAction->setText(tr("&Restore"));
-    connect(restoreAction, &QAction::triggered, m_window, &QWidget::showNormal);
+    connect(restoreAction, &QAction::triggered, window, &QWidget::showNormal);
 
     quitAction->setText(tr("&Quit"));
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);

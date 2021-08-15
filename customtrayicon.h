@@ -20,7 +20,7 @@ private:
     void setTrayIconConnections();
 
 private:
-    QWidget* m_window;
+    QWidget* window;
     QMenu* trayIconMenu;
     QAction* reloadAction;
     QAction* minimizeAction;
