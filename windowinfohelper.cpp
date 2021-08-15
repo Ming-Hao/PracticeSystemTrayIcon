@@ -37,6 +37,12 @@ BOOL WindowInfoHelper::enumWindowProc(HWND hwnd, LPARAM lParam)
     const DWORD TITLE_SIZE = 1024;
     WCHAR windowTitle[TITLE_SIZE];
 
+    DWORD dwProcId = 0;
+    ::GetWindowThreadProcessId(hwnd, &dwProcId);
+    if(GetCurrentProcessId() == dwProcId) {
+        return TRUE;
+    }
+
     ::GetWindowTextW(hwnd, windowTitle, TITLE_SIZE);
 
     QString title = QString::fromWCharArray(windowTitle);
